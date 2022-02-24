@@ -628,18 +628,97 @@ khalil.average = calcAverage(khalil.tips);
 console.log(ibrahim, khalil);
 
 if (ibrahim.average > khalil.average) {
-    console.log(ibrahim.fullName + ' \'s family pays higher tips, with an average of $' + ibrahim.average);
+    console.log(ibrahim.fullName + '\'s family pays higher tips, with an average of $' + ibrahim.average);
 } else if (khalil.average > ibrahim.average) {
-    console.log(khalil.fullName + ' \'s family pays higher tips, with an average of $' + khalil.average);
+    console.log(khalil.fullName + '\'s family pays higher tips, with an average of $' + khalil.average);
 }
 
 
+/// Hoisting
+// This works on functional declaration alone and not on functional expression
+
+calculateAge(1980);
+
+function calculateAge(year) {
+    console.log(2016 - year);
+}
+
+// Code as fnc expression
+
+// retirement(1990); doesn't work because it is an expression
+var retirement = function(year) {
+    console.log(65 - (2022 - year));
+} 
+
+console.log(age);
+var age = 23;
+
+function foo() {
+    console.log(age);
+    var age = 30;
+    console.log(age);
+}
+
+foo();
+console.log(age);
 
 
+/////////////////////////////////
+///  Lecture: Scoping
+
+///////////////////////////////////////
+var a = 'Hello! ';
+first();
+
+function first() {
+    var b = 'Hi! ';
+    second();
+
+    function second() {
+        var c = 'Hey!';
+        console.log(a + b + c ); 
+        third();
+    }
+}
+
+function third() {
+    var d = 'Khalil';
+    console.log(a+d);
+}
+
+//The 'This' keyword
+
+calculateAge(2000);
+
+function calculateAge(year) {
+    console.log(2022 - year);
+    console.log(this);
+}
+
+var khalil = {
+    name: 'John',
+    yearOfBirth: 1990,
+    calculateAge: function() {
+        console.log(this);
+        console.log(2022 - this.yearOfBirth)
+
+    /* function innerFunction() {
+        console.log(this);
+    }
+    innerFunction(); */
+    }
+}
+
+khalil.calculateAge();
 
 
+var ibrahim = {
+    name: 'Ibrahim',
+    yearOfBirth: 2000
+};
 
-
+ibrahim.calculateAge = khalil.calculateAge;
+ibrahim.calculateAge();
 
 
 
